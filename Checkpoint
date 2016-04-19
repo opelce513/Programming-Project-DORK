@@ -1,3 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
 Checkpoint()
 {
 for(i=0; i<200; i+=25){
