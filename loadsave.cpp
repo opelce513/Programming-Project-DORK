@@ -1,8 +1,9 @@
+#include "loadsave.h"
+#include "dork.h'
+#include "game.h"
 #include <fstream>
 #include <string>
 #include <iostream>
-
-using namespace std;
 
 void save(character a&){
 	ofstream outfile;
@@ -27,9 +28,4 @@ void load(character a&){
 		a.setSteps(s);
 	}	
 	myfile.close();
-}
-
-int main()
-{
-	return 0;
 }
