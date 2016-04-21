@@ -19,14 +19,17 @@
 #include <iostream> 
 #include <string>
 #include <stdio.h> 
+#include <cstdlib> 
+#include <ctime> 
 
 using namespace std; 
 
-
+void roll(char user_input, character &a); 
 int main(int argc, char *argv[])
 {
+	srand(time(NULL)); 
 	display_init();
-	intro_display(); 
+	//intro_display(); 
 	clearDisplay(1);
 	character a; 
 	
@@ -36,6 +39,12 @@ int main(int argc, char *argv[])
 	a.setName(str);
 	a.getName();
 	a.printCharacter(); 
+	
+	printw("Press r to roll the dice, press q to quit: " );
+	char x=getch(); 
+	printw("\n"); 
+	roll(x,a); 
+ 
 	
 	getch();
     display_close();
