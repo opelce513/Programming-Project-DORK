@@ -30,7 +30,7 @@ for(i=0; i<200; i+=25){
     {
     }
     else(){
-    cout << "Something went wrong" << endl;
+    printw("Something went wrong \n");
     }
     
     
