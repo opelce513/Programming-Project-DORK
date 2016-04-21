@@ -7,7 +7,10 @@
 void save(character &a){
 	ofstream outfile;
 	outfile.open("Save1.dat");
-	outfile << a.getName() << a.getLevel() << a.getEnergy() << a.getSteps();
+	outfile << a.getName() << endl;
+	outfile << a.getLevel() << endl;
+	outfile << a.getEnergy() << endl;
+	outfile << a.getSteps() << endl;
 	outfile.close();
 }
 
@@ -20,7 +23,10 @@ void load(character &a){
 	}
 	string n,l;
 	int e,s;
-	myfile >> n >> l >> e >> s;
+	myfile >> n >> endl;
+	myfile >> l >> endl;
+	myfile >> e >> endl;
+	myfile >> s >> endl;
 		a.setName(n);
 		a.setLevel(l);
 		a.setEnergy(e);
