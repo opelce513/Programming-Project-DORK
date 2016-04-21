@@ -5,14 +5,14 @@
 #include <string>
 #include <iostream>
 
-void save(character a&){
+void save(character &a){
 	ofstream outfile;
 	outfile.open("Save1.dat");
 	outfile << a.getName() << a.getLevel() << a.getEnergy() << a.getSteps();
 	outfile.close();
 }
 
-void load(character a&){
+void load(character &a){
 	ifstream myfile	
 	myfile.open ("Save1.dat");
 	if (!myfile){
