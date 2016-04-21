@@ -3,7 +3,7 @@
 #include "dork.h"
 #include "game.h"
 
-void save(character a&);
-void load(character a&);
+void save(character &a);
+void load(character &a);
 
 #endif 
