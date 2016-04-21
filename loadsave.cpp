@@ -25,6 +25,6 @@ void load(character &a){
 		a.setLevel(l);
 		a.setEnergy(e);
 		a.setSteps(s);
-	}	
+		
 	myfile.close();
 }
