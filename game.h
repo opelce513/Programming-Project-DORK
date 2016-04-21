@@ -11,15 +11,15 @@ class character{
 	public: 
 		character();
 		void setName(string in_name); 
-		void setLevel(string in_level); 
-		void setEnergy(int in_energy); 
-		void setSteps(int in_steps); 
 		string getName(); 
-		string getLevel();
+		void printCharacter(); 
 		int getEnergy();
 		int getSteps();
-		void printCharacter(); 
-	 
+		string getLevel();
+		void setSteps(int in_steps); 
+		void setEnergy(int in_energy);
+		void setLevel(string in_level);
+
 };
 
 #endif 
