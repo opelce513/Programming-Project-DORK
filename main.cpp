@@ -23,7 +23,8 @@
 #include <ctime> 
 
 using namespace std; 
-
+void save(character &a);
+void load(character &a);
 void roll(char user_input, character &a); 
 int main(int argc, char *argv[])
 {
@@ -33,19 +34,28 @@ int main(int argc, char *argv[])
 	clearDisplay(1);
 	character a; 
 	
+	printw("Loadgame ?: \n" ); 
+	char z = getch();
+	if (z == 'l'){
+		load(a);
+		clearDisplay(1);
+		a.printCharacter(); 
+	}
+	else{
 	printw("What is your name?: \n");
 	char str[20];
 	getstr(str); 
 	a.setName(str);
 	a.getName();
 	a.printCharacter(); 
-	
+	}
+
 	printw("Press r to roll the dice, press q to quit: " );
 	char x=getch(); 
 	printw("\n"); 
 	roll(x,a); 
  
-	
+	save(a); 
 	getch();
     display_close();
     return 0;
