@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-void save(character &a){
+void save(character& a){
 ofstream outfile;
 outfile.open("Save1.dat");
 outfile << a.getName() << endl;
@@ -14,47 +14,28 @@ outfile << a.getSteps() << endl;
 outfile.close();
 }
 
-void load(character &a){
+void load(character& a){
 	ifstream myfile;
 	myfile.open ("Save1.dat");
-		if (!myfile){
-		printw("Could not open file \n");
-		printw("Please make a new character you be breaking my game bro. Not cool :( \n");
-		printw("What is your name?: \n");
-		char str[20];
-		getstr(str); 
-		a.setName(str);
-		a.getName();
-		a.printCharacter(); 
-			}
-
-	string n,l,line;
-	int e,s;
-	int count=0;
-    while (getline(myfile, line)) {
-	if (count == 0){
-	myfile >> n;
-	count++;
-	}
-	else if (count == 1){
-	myfile >> l;
-	count++;
-	}
-	else if (count == 2){
-	myfile >> e;
-	count++;
-	}
-	else if (count == 3){
-	myfile >> s;
-	count++;
+	if (!myfile){
+	printw("Could not open file \n");
 	}
 	else {
+	string n,l;
+	int e,s;
+	int count=0;
+	string temp[4];
+   	for (string line;getline(myfile,line);) {
+	temp[count]=line;	
+	count++;
+	//clearDisplay(1);
+	//printw("%s\n",temp[count-1].c_str());
+	//getch();	
 	}
+	a.setName(temp[0]);
+	a.setLevel(temp[1]);
+	a.setEnergy(atoi(temp[2].c_str()));
+	a.setSteps(atoi(temp[3].c_str()));
 	}
-	a.setName(n);
-	a.setLevel(l);
-	a.setEnergy(e);
-	a.setSteps(s);
-
 	myfile.close();
 }
