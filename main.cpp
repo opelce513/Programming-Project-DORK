@@ -23,9 +23,10 @@
 #include <ctime> 
 
 using namespace std; 
-void save(character &a);
-void load(character &a);
-void roll(char user_input, character &a); 
+void save(character& a);
+void load(character& a);
+void checkpoint(int num, int roll,character& a);
+void roll(char user_input, character& a); 
 int main(int argc, char *argv[])
 {
 	srand(time(NULL)); 
@@ -34,20 +35,28 @@ int main(int argc, char *argv[])
 	clearDisplay(1);
 	character a; 
 	
-	printw("Loadgame ?: \n" ); 
+	printw("Do you want to create a Newgame 'n' or Loadgame 'l'?:" ); 
+	
 	char z = getch();
 	if (z == 'l'){
 		load(a);
+		getch();		
 		clearDisplay(1);
 		a.printCharacter(); 
 	}
-	else{
-	printw("What is your name?: \n");
+	else if (z=='n'){
+	printw("\nWhat is your name?: \n");
 	char str[20];
 	getstr(str); 
 	a.setName(str);
 	a.getName();
+	clearDisplay(1);
 	a.printCharacter(); 
+	}
+	else 
+	{
+		printw("Press l or n");
+		return -1;
 	}
 
 	printw("Press r to roll the dice, press q to quit: " );
@@ -60,4 +69,3 @@ int main(int argc, char *argv[])
     display_close();
     return 0;
 }
-
