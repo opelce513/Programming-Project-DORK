@@ -23,9 +23,9 @@
 #include <ctime> 
 
 using namespace std; 
-void save(character& a);
+
+
 void load(character& a);
-void checkpoint(int num, int roll,character& a);
 void roll(char user_input, character& a); 
 int main(int argc, char *argv[])
 {
@@ -63,8 +63,7 @@ int main(int argc, char *argv[])
 	char x=getch(); 
 	printw("\n"); 
 	roll(x,a); 
- 
-	save(a); 
+  
 	getch();
     display_close();
     return 0;
