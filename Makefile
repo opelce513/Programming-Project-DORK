@@ -1,6 +1,5 @@
-resu: display.o main.o game.o play.o loadsave.o
-	g++  display.o main.o game.o play.o loadsave.o -o resu -lncurses
-	
+resu: display.o main.o game.o play.o loadsave.o checkpoint.o
+	g++  display.o main.o game.o play.o loadsave.o checkpoint.o -o resu -lncurses
 
 display.o: display.cpp
 	g++ -c -std=c++11 display.cpp -lncurses
@@ -12,6 +11,8 @@ play.o: play.cpp
 	g++ -c -std=c++11 play.cpp -lncurses
 loadsave.o: loadsave.cpp 
 	g++ -c -std=c++11 loadsave.cpp -lncurses
+checkpoint.o: checkpoint.cpp
+	g++ -c -std=c++11 checkpoint.cpp -lncurses
 run:
 	./resu
 clean:
