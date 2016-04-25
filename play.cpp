@@ -8,7 +8,9 @@
 
 using namespace std; 
 
-void roll(char user_input,character &a){ 
+void checkpoint(int num, int roll,character& a);
+
+void roll(char user_input,character& a){ 
 	if (user_input == 'r'){ 
 		int roll_num = ((rand() % 6) + 1); 
 		int y = a.getEnergy(); // get the intial 10 energy points
@@ -17,6 +19,7 @@ void roll(char user_input,character &a){
 		a.getEnergy(); //get the energy after the subtraction
 		int num=a.getSteps();//get number of steps 
 		a.setSteps(num+roll_num);
+		checkpoint(num,roll_num,a);
 		clearDisplay(1); //clear the display after pressing any button
 		a.printCharacter(); //print character with update energy and steps 
 		printw("your number of steps is : %i \n", roll_num); 
@@ -34,6 +37,3 @@ void roll(char user_input,character &a){
 		}
 	
 }
-
-
-	
