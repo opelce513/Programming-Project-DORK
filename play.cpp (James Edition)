@@ -48,7 +48,6 @@ ifstream myfile;
 	int question[22702];
 	int locationx[22702];
 	int locationy[22702];
-	string a,b,c,d,e,f,a1,a2,e1,e2;
    	
 		for (string line;getline(myfile,line);) {
 	int x=0;
@@ -60,7 +59,7 @@ ifstream myfile;
 	char carrot = '^'; 
 	char comma = ',';
 	int pos[6] = {0,0,0,0,0,0}; 
-	int count3=0;
+	string a,b,c,d,e,f,a1,a2,e1,e2;
 			for (int i = 0; i < length; i++){				
 				if(findCarrot[i]=='^'){ 
 					pos[count]=i;
@@ -83,8 +82,16 @@ ifstream myfile;
 			}
 			a1=a.substr(0,count2);
 			a2=a.substr(count2+1,length2-count2-1);
-			e1=e.substr(0,count2);
-			e2=e.substr(count2+1,length2-count2-1);
+		
+			int length3=strlen(e.c_str());
+			int count3=0;
+			for (int i=0; i < length3; i++){
+				if(e[i]==comma){
+					count3=i;
+				}
+			}
+			e1=e.substr(0,count3);
+			e2=e.substr(count3+1,length3-count3-1);
 			//printw("%s \n %s % s\n", a.c_str(),a1.c_str(),a2.c_str()); //for testing purposes
 			//printw("%s \n %s % s\n", e.c_str(),e1.c_str(),e2.c_str()); //for testing purposes
 	//printw("%s \n %s \n %s \n %s \n %s \n %s ", a.c_str(),b.c_str(),c.c_str(),d.c_str(),e.c_str(),f.c_str());
@@ -97,6 +104,7 @@ ifstream myfile;
 			locationx[key]=stoi(e1.c_str());
 			locationy[key]=stoi(e2.c_str());
 			question[key]=stoi(f.c_str());
+			clearDisplay(1);			
 			printw("%i %s %i %i %i %i %i", key, event[key].c_str(), response[key], energy[key], locationx[key], locationy[key], question[key]);
 		}
 		myfile.close();
