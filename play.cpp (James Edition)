@@ -7,7 +7,20 @@
 
 using namespace std; 
 
+string event[22702];
+int response[22702];
+int energy[22702];
+int question[22702];
+int locationx[22702];
+int locationy[22702];
+string color;
+string phrase;
+string sport;
+string music;
+string job;	
+
 void checkpoint(int num, int roll,character& a);
+void update(character& a, int roll_num);
 
 void roll(char user_input,character& a){ 
 	if (user_input == 'r'){ 
@@ -19,7 +32,8 @@ void roll(char user_input,character& a){
 		int num=a.getSteps();//get number of steps 
 		a.setSteps(num+roll_num);
 		checkpoint(num,roll_num,a);
-		clearDisplay(1); //clear the display after pressing any button
+		clearDisplay(1);		
+		update(a,roll_num);
 		a.printCharacter(); //print character with update energy and steps 
 		printw("your number of steps is : %i \n", roll_num); 
 		printw("Press r to roll the dice, press q to quit: " );
@@ -34,6 +48,35 @@ void roll(char user_input,character& a){
 		printw("You did not press r or q, try again\n"); 
 		}
 }
+void update(character& a, int roll_num){
+		string level=a.getLevel();
+		if (level=="Terrestrial"){
+		a.setLocationy(roll_num);
+		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
+			if (response[key]==0)){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+			}
+			else if (response[key]==1){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+			}
+		}
+		else if (level=="Arboreal"){
+		
+		}
+		else if (level=="Aerial"){
+
+		}
+		else {
+		printw("Oh no you have no level");
+		}
+	}
+
 
 void database(){
 ifstream myfile;
@@ -42,13 +85,6 @@ ifstream myfile;
 	printw("Could not open file \n");
 	}
 	else {
-	string event[22702];
-	int response[22702];
-	int energy[22702];
-	int question[22702];
-	int locationx[22702];
-	int locationy[22702];
-   	
 		for (string line;getline(myfile,line);) {
 	int x=0;
 	int y=0;
@@ -103,9 +139,7 @@ ifstream myfile;
 			energy[key]=stoi(d.c_str());
 			locationx[key]=stoi(e1.c_str());
 			locationy[key]=stoi(e2.c_str());
-			question[key]=stoi(f.c_str());
-			clearDisplay(1);			
-			printw("%i %s %i %i %i %i %i", key, event[key].c_str(), response[key], energy[key], locationx[key], locationy[key], question[key]);
+			question[key]=stoi(f.c_str());			
 		}
 		myfile.close();
 		}
