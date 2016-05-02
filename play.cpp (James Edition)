@@ -16,7 +16,7 @@ int locationy[22702];
 string color;
 string phrase;
 string sport;
-string music;
+string genre;
 string job;	
 
 void checkpoint(int num, int roll,character& a);
@@ -65,17 +65,113 @@ void update(character& a, int roll_num){
 			a.setLocationx(locationx[key]);
 			a.setLocationy(locationy[key]);
 			}
+			else{
+			}
 		}
 		else if (level=="Arboreal"){
-		
+		a.setLocationx(roll_num);
+		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
+			if (response[key]==0)){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+			}
+			else if (response[key]==1){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+				if (a.getLocationx()==25){
+					char str[20];
+					getstr(str);
+					phrase=str;
+				}
+				else if(a.getLocationx()==75){
+					char str[20];
+					getstr(str);
+					color=str;
+				}
+				else if(a.getLocationx()==110){
+					char str[20];
+					getstr(str);
+					if (color!=str){
+					printw("How can you forget your favorite color? Game Over.");
+					a.setEnergy(0);
+					}
+				}
+				else{
+				}
+			}
+			else{
+			}
 		}
 		else if (level=="Aerial"){
-
+		a.setLocationx(roll_num);
+		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
+			if (response[key]==0)){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+			}
+			else if (response[key]==1){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(locationx[key]);
+			a.setLocationy(locationy[key]);
+				if (a.getLocationy()==70){
+					char str[20];
+					getstr(str);
+					job=str;
+				}
+				else if(a.getLocationy()==120){
+					char str[20];
+					getstr(str);
+					genre=str;
+				}
+				else if(a.getLocationx()==170){
+					char str[20];
+					getstr(str);
+					if (job!=str){
+					printw("How can you forget your favorite dream job? Game Over.");
+					a.setEnergy(0);
+					}
+				}
+				else if(a.getLocationx()==160){
+					char str[20];
+					getstr(str);
+					if (genre!=str){
+					printw("How can you forget your favorite genre of music? Game Over.");
+					a.setEnergy(0);
+					}
+				}
+				else if(a.getLocationx()==130){
+					char str[20];
+					getstr(str);
+					if (sport!=str){
+					printw("How can you forget your favorite sport? Game Over.");
+					a.setEnergy(0);
+					}
+				}
+				else if(a.getLocationx()==200){
+					char str[20];
+					getstr(str);
+					if (phrase!=str){
+					printw("How can you forget your favorite phrase? Game Over.");
+					a.setEnergy(0);
+					}
+				}
+				else{
+				}
+			}
+			else{
+			}
 		}
 		else {
 		printw("Oh no you have no level");
 		}
-	}
+	}	
 
 
 void database(){
