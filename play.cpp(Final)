@@ -22,14 +22,15 @@ string job;
 void checkpoint(int num, int roll,character& a);
 void update(character& a, int roll_num);
 
-void roll(char user_input,character& a){ 
+void roll(char user_input,character& a){
+	int y = a.getEnergy(); // get the intial 10 energy points
+	if (y>0){ 
 	if (user_input == 'r'){ 
 		int roll_num = ((rand() % 6) + 1); 
-		int y = a.getEnergy(); // get the intial 10 energy points
 		--y;// subtract 1 energy per roll
 		a.setEnergy(y); //set the energy again after subtraction
 		a.getEnergy(); //get the energy after the subtraction
-		int num=a.getSteps();//get number of steps 
+		int num=a.getSteps();//get number of steps 		
 		a.setSteps(num+roll_num);
 		checkpoint(num,roll_num,a);
 		clearDisplay(1);		
@@ -47,40 +48,78 @@ void roll(char user_input,character& a){
 	else{ 
 		printw("You did not press r or q, try again\n"); 
 		}
+	}
 }
+
 void update(character& a, int roll_num){
 		string level=a.getLevel();
 		if (level=="Terrestrial"){
-		a.setLocationy(roll_num);
-		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
-			if (response[key]==0)){
-			printw("%s \n", event[key].c_str());
-			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
+			a.setLocationy(a.getLocationy()+roll_num);
+			if((a.getLocationy()>50)&&(a.getLocationy()<56)){
+			a.setSteps(50);
+			a.setLocationy(50);
 			}
-			else if (response[key]==1){
+			if((a.getLocationy()>100)&&(a.getLocationy()<106)){
+				a.setSteps(100);
+				a.setLocationy(100);
+			}
+			if((a.getLocationy()>150)&&(a.getLocationy()<156)){
+				a.setSteps(150);
+				a.setLocationy(150);
+			}
+		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
+			if (response[key]==0){
 			printw("%s \n", event[key].c_str());
 			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
-				if (locationy[] == 40){ 
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setSteps(a.getSteps()+locationy[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
+			}
+			if ((response[key]==1)&&(question[key]==0)){
+				if(a.getLocationy() == 18){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+				if ((a.getLocationy()==50)||(a.getLocationy()==100)||(a.getLocationy()==150)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type y or n ");				
+				char z = getch();
+				if (z=='y'){
+					printw("\n");
+					a.setLevel("Arboreal");
+					}		
+				}
+			}
+			if (question[key]==1){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setSteps(a.getSteps()+locationy[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
+				if (a.getLocationy() == 40){ 
 					char str[20]; 
 					getstr(str); 
 					sport = str; 
 				}
-				if (locationy[] == 70){ 
+				if (a.getLocationy() == 70){ 
 					char str[20]; 
 					getstr(str); 
 					job = str; 
 				} 
-				if (locationy[] == 120){ 
+				if (a.getLocationy() == 120){ 
 					char str[20]; 
 					getstr(str); 
 					genre = str; 
 				} 
-				if (locationy[] == 130){ 
-					if (!sport){
+				if (a.getLocationy() == 130){ 
+					char str[20]; 
+					getstr(str);  
+					if (sport!=str){
 						printw("Common man! How come you didn't know your favorite sport!?! Game Over!");
 						a.setEnergy(0);  
 					} 
@@ -90,19 +129,112 @@ void update(character& a, int roll_num){
 			}
 		}
 		else if (level=="Arboreal"){
-		a.setLocationx(roll_num);
+		a.setLocationx(a.getLocationx()+roll_num);
 		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
-			if (response[key]==0)){
-			printw("%s \n", event[key].c_str());
-			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
+			if (response[key]==0){
+			if ((a.getLocationx()==150)&&((a.getLocationy()==50)||(a.getLocationy()==100)||(a.getLocationy()==150))){
+				a.setLevel("Aerial");
 			}
-			if (response[key]==1){
+			if ((a.getLocationx()==142)&&((a.getLocationy()==50)||(a.getLocationy()==100))){
+				a.setLevel("Terrestrial");
+			}
+			if ((a.getLocationx()==150)&&(a.getLocationy()==147)){
+				a.setLevel("Terrestrial");
+			}
 			printw("%s \n", event[key].c_str());
 			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
+			a.setSteps(a.getSteps()+locationx[key]);	
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
+			if ((response[key]==1)&&(question[key]==0)){
+			if ((a.getLocationx()==7)&&(a.getLocationy() == 50)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==21)&&(a.getLocationy() == 50)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==63)&&(a.getLocationy() == 50)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==7)&&(a.getLocationy() == 100)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==21)&&(a.getLocationy() == 100)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==63)&&(a.getLocationy() == 100)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==7)&&(a.getLocationy() == 150)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==21)&&(a.getLocationy() == 150)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			if ((a.getLocationx()==63)&&(a.getLocationy() == 150)){
+				printw("%s \n", event[key].c_str());
+				printw("\n Type e or s ");				
+				char z = getch();
+				if (z=='e'){
+					printw("\n");
+					a.setEnergy(a.getEnergy()+energy[key]);
+					}
+				}
+			}			
+			if ((response[key]==1)&&(question[key]==1)){
+			printw("%s \n", event[key].c_str());
+			a.setEnergy(a.getEnergy()+energy[key]);
+			a.setSteps(a.getSteps()+locationx[key]);
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
 				if (a.getLocationx()==25){
 					char str[20];
 					getstr(str);
@@ -124,19 +256,21 @@ void update(character& a, int roll_num){
 			}
 		}
 		else if (level=="Aerial"){
-		a.setLocationx(roll_num);
+		a.setLocationy(a.getLocationy()+roll_num);
 		int key=a.getLocationx()*a.getLocationx()+a.getLocationy();
-			if (response[key]==0)){
+			if (response[key]==0){
 			printw("%s \n", event[key].c_str());
 			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setSteps(a.getSteps()+locationy[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
 			}
-			if (response[key]==1){
+			if (question[key]==1){
 			printw("%s \n", event[key].c_str());
 			a.setEnergy(a.getEnergy()+energy[key]);
-			a.setLocationx(locationx[key]);
-			a.setLocationy(locationy[key]);
+			a.setLocationx(a.getLocationx()+locationx[key]);
+			a.setSteps(a.getSteps()+locationy[key]);
+			a.setLocationy(a.getLocationy()+locationy[key]);
 				if (a.getLocationy()==70){
 					char str[20];
 					getstr(str);
@@ -185,7 +319,7 @@ void update(character& a, int roll_num){
 		printw("Oh no you have no level");
 		}
 	}	
-
+}
 
 void database(){
 ifstream myfile;
